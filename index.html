@@ -32,10 +32,7 @@
         
         @keyframes fall {
             0% {
-                transform: translateY(-100px) translateX(0);
-                opacity: 0;
-            }
-            10% {
+                transform: translateY(-10px) translateX(0);
                 opacity: 1;
             }
             100% {
@@ -123,8 +120,8 @@
         <h1>Zenex Hub</h1>
         <div class="divider"></div>
         <div class="button-container">
-            <button>Button 1</button>
-            <button>Button 2</button>
+            <a href="https://lootdest.org/s?IOSQRRlB" class="button-link" target="_blank">Script</a>
+            <a href="https://discord.gg/nBxPj7g2xT" class="button-link" target="_blank">Join our server!</a>
             <a href="https://zenex.instatus.com/" class="button-link" target="_blank">Status</a>
         </div>
     </div>
@@ -139,12 +136,13 @@
     </div>
 
     <script>
-        // Create snowflakes
-        function createSnowflakes() {
+        // Create snowflakes immediately
+        function createInitialSnowflakes() {
             const snowflakesContainer = document.getElementById('snowflakes-container');
             const snowflakeChars = ['❄', '❅', '❆', '•', '*', '⋆', '✧', '⁎'];
-            const numberOfSnowflakes = 200; // Increased number of snowflakes
+            const numberOfSnowflakes = 200;
             
+            // Fill the entire screen with snowflakes at various positions
             for (let i = 0; i < numberOfSnowflakes; i++) {
                 const snowflake = document.createElement('div');
                 const randomChar = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
@@ -152,36 +150,34 @@
                 snowflake.className = 'snowflake';
                 snowflake.textContent = randomChar;
                 
-                // Random positioning
+                // Random horizontal positioning
                 snowflake.style.left = `${Math.random() * 100}vw`;
                 
-                // Random size - wider range for more variety
+                // Random vertical positioning (throughout the screen)
+                snowflake.style.top = `${Math.random() * 100}vh`;
+                
+                // Random size
                 const size = Math.random() * 20 + 3;
                 snowflake.style.fontSize = `${size}px`;
                 
                 // Random opacity
                 snowflake.style.opacity = Math.random() * 0.8 + 0.2;
                 
-                // Random animation duration - wider range for more natural effect
+                // Random animation duration
                 const duration = Math.random() * 15 + 5;
                 snowflake.style.animationDuration = `${duration}s`;
                 
-                // Random animation delay - spread out for continuous effect
-                const delay = Math.random() * 10;
-                snowflake.style.animationDelay = `${delay}s`;
-                
-                // Random horizontal movement range
-                const horizontalMovement = Math.random() * 150 - 75;
-                snowflake.style.setProperty('--horizontal-move', `${horizontalMovement}px`);
+                // No delay - start immediately but from current position
+                snowflake.style.animationDelay = '0s';
                 
                 snowflakesContainer.appendChild(snowflake);
             }
         }
         
-        // Initialize snowflakes when page loads
-        window.addEventListener('load', createSnowflakes);
+        // Initialize snowflakes immediately
+        createInitialSnowflakes();
         
-        // Create new snowflakes periodically to ensure continuous snowfall
+        // Create new snowflakes periodically
         setInterval(() => {
             const snowflakesContainer = document.getElementById('snowflakes-container');
             const snowflakeChars = ['❄', '❅', '❆', '•', '*', '⋆', '✧', '⁎'];
@@ -194,6 +190,7 @@
                 snowflake.className = 'snowflake';
                 snowflake.textContent = randomChar;
                 snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.top = '-10px'; // Start just above viewport
                 
                 const size = Math.random() * 20 + 3;
                 snowflake.style.fontSize = `${size}px`;
@@ -201,7 +198,7 @@
                 
                 const duration = Math.random() * 15 + 5;
                 snowflake.style.animationDuration = `${duration}s`;
-                snowflake.style.animationDelay = '0s';
+                snowflake.style.animationDelay = '0s'; // No delay
                 
                 snowflakesContainer.appendChild(snowflake);
                 
@@ -210,7 +207,7 @@
                     snowflakesContainer.removeChild(snowflakesContainer.children[0]);
                 }
             }
-        }, 3000);
+        }, 1000); // Add new flakes more frequently (every second)
     </script>
 </body>
 </html>
