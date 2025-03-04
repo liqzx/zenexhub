@@ -112,6 +112,13 @@
             line-height: 1.6;
         }
         
+        /* Version date style */
+        .version-date {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+        
         /* Modal styles */
         .modal {
             display: none;
@@ -234,6 +241,8 @@
             Founders: Finn, Sap<br>
             UI Design: Finn<br>
             Contributor: Juju
+            <!-- VERSION DATE - EDIT THIS LINE TO UPDATE -->
+            <div class="version-date">Version: <span id="versionDate">March 3, 2025</span></div>
         </div>
     </div>
     
@@ -376,6 +385,15 @@
                 }
             });
         });
+        
+        // Alternative method to update version date via JavaScript
+        // Uncomment this section if you prefer updating via JavaScript
+        /*
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update version date - EDIT THIS LINE TO UPDATE VERSION DATE
+            document.getElementById('versionDate').textContent = 'March 3, 2025';
+        });
+        */
     </script>
 </body>
 </html>
