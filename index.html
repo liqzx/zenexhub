@@ -3,397 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenex Hub</title>
+    <title>Zenex - Home</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .navbar .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar .nav-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .navbar .nav-links a:hover {
+            color: #fff;
+        }
+        
+        .navbar .nav-links a.active {
+            color: #fff;
+        }
+        
+        .navbar .discord-btn {
+            display: flex;
+            align-items: center;
+            background-color: #5865F2;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .navbar .discord-btn img {
+            height: 20px;
+            margin-right: 5px;
+        }
+        
+        .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: Arial, sans-serif;
-            background: #000000;
-            color: white;
-            overflow: hidden;
+            padding: 4rem 2rem;
             position: relative;
+            overflow: hidden;
+            min-height: 20vh;
         }
         
-        .snowflake {
-            position: absolute;
-            color: #fff;
-            font-size: 20px;
-            animation-name: fall;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            z-index: -1;
-        }
-        
-        @keyframes fall {
-            0% {
-                transform: translateY(-10px) translateX(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) translateX(100px);
-                opacity: 0.3;
-            }
-        }
-        
-        .container {
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
             text-align: center;
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            z-index: 1;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+            z-index: 2;
         }
         
-        h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-        
-        .divider {
-            width: 100%;
-            height: 2px;
-            background-color: #555;
-            margin: 20px 0 30px 0;
-        }
-        
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-        
-        button, .button-link {
-            width: 200px;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: #444;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            text-decoration: none;
+        .hero p {
+            font-size: 1.2rem;
+            color: #bbb;
             text-align: center;
+            z-index: 2;
         }
         
-        button:hover, .button-link:hover {
-            background-color: #666;
-            transform: scale(1.05);
-        }
-        
-        .footer {
-            width: 100%;
-            margin-top: auto;
-            padding: 20px 0;
-            text-align: center;
-            z-index: 1;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        
-        .footer-divider {
-            width: 100%;
-            height: 2px;
-            background-color: #555;
-            margin-bottom: 15px;
-        }
-        
-        .credits {
-            font-size: 14px;
-            color: #AAA;
-            line-height: 1.6;
-        }
-        
-        /* Version date style */
-        .version-date {
-            font-size: 12px;
-            color: #888;
-            margin-top: 10px;
-        }
-        
-        /* Modal styles */
-        .modal {
-            display: none;
+        .snowflake-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
+            overflow: hidden;
             pointer-events: none;
+            z-index: 1;
         }
         
-        .modal.active {
-            opacity: 1;
-            pointer-events: all;
+        .snowflake {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation-name: snowfall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
         }
         
-        .modal-content {
-            background-color: #222;
-            padding: 25px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            transform: scale(0.8);
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(calc(100vh + 10px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(20, 20, 20, 0.8);
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+        }
+        
+        .about-us {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        
+        .about-us h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .about-us p {
+            font-size: 1.1rem;
+            color: #bbb;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .feature-card {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             transition: transform 0.3s;
         }
         
-        .modal.active .modal-content {
-            transform: scale(1);
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
         
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
         
-        .modal-title {
-            font-size: 24px;
-            margin: 0;
-        }
-        
-        .close-button {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #aaa;
-            cursor: pointer;
-            transition: color 0.2s;
-            padding: 0;
-            width: auto;
-        }
-        
-        .close-button:hover {
-            color: white;
-            transform: none;
-        }
-        
-        textarea {
-            width: 100%;
-            height: 150px;
-            background-color: #333;
-            color: white;
-            border: 1px solid #555;
-            border-radius: 5px;
-            padding: 10px;
-            font-family: Arial, sans-serif;
-            margin-bottom: 15px;
-            resize: vertical;
-        }
-        
-        .submit-button {
-            background-color: #444;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            width: 100%;
-        }
-        
-        .submit-button:hover {
-            background-color: #666;
-        }
-        
-        .success-message {
-            display: none;
-            color: #4CAF50;
-            margin-top: 15px;
+        .feature-card h3 {
+            margin: 0 0 0.5rem 0;
             text-align: center;
+        }
+        
+        .feature-card p {
+            margin: 0;
+            text-align: center;
+            color: #bbb;
+        }
+        
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 2rem;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+        }
+        
+        .cta-button:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
-    <div id="snowflakes-container"></div>
+    <!-- Snowflake Container -->
+    <div class="snowflake-container" id="snowflakeContainer"></div>
     
-    <div class="container">
-        <h1>Zenex Hub</h1>
-        <div class="divider"></div>
-        <div class="button-container">
-            <a href="https://lootdest.org/s?IOSQRRlB" class="button-link" target="_blank">Script</a>
-            <a href="https://discord.gg/nBxPj7g2xT" class="button-link" target="_blank">Join our server!</a>
-            <a href="https://zenex.instatus.com/" class="button-link" target="_blank">Status</a>
-            <button id="suggestion-button">Suggestions</button>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/api/placeholder/30/30" alt=" ">
+            Zenex
         </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="script.html">Script</a>
+        </div>
+        <a href="#" class="discord-btn" id="discordBtn">
+            <img src="/api/placeholder/20/20" alt=" ">
+            Join Discord
+        </a>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Zenex</h1>
+        <p>The next generation of scripting solutions</p>
     </div>
     
-    <div class="footer">
-        <div class="footer-divider"></div>
-        <div class="credits">
-            Founders: Finn, Sap<br>
-            UI Design: Finn<br>
-            Contributor: Juju
-            <!-- VERSION DATE - EDIT THIS LINE TO UPDATE -->
-            <div class="version-date">Version: <span id="versionDate">March 3, 2025</span></div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="about-us">
+            <h2>About Us</h2>
+            <p>
+                Zenex is a cutting-edge scripting platform designed to revolutionize the way developers create and execute scripts. 
+                Our team of passionate developers works tirelessly to bring you the most efficient, powerful, and user-friendly scripting experience possible.
+            </p>
+            <p>
+                Our mission is to empower developers with tools that make complex tasks simple and accessible. Join our growing community today!
+            </p>
         </div>
-    </div>
-    
-    <!-- Suggestion Modal -->
-    <div id="suggestion-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Submit a Suggestion</h3>
-                <button class="close-button">&times;</button>
+        
+        <div class="about-us">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">✅</div>
+                    <h3>Universal Compatibility</h3>
+                    <p>Works with most popular executors</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>High Performance</h3>
+                    <p>Run scripts with exceptional speed</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Secure Execution</h3>
+                    <p>Advanced protection for your scripts</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="icon">👥</div>
+                    <h3>Community Support</h3>
+                    <p>Join our growing developer community</p>
+                </div>
             </div>
-            <textarea id="suggestion-text" placeholder="Enter your suggestion here..."></textarea>
-            <button class="submit-button">Submit</button>
-            <div class="success-message">Thanks for your suggestion!</div>
+            
+            <a href="script.html" class="cta-button">
+                Get Started
+            </a>
         </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Zenex Team. All rights reserved.</p>
     </div>
 
+    <!-- JavaScript -->
     <script>
-        // Create snowflakes immediately
-        function createInitialSnowflakes() {
-            const snowflakesContainer = document.getElementById('snowflakes-container');
-            const snowflakeChars = ['❄', '❅', '❆', '•', '*', '⋆', '✧', '⁎'];
-            const numberOfSnowflakes = 200;
+        /**
+         * Snowflake Animation
+         * Creates dynamic animated snowflakes falling across the screen
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create snowflakes when DOM is fully loaded
+            createSnowflakes();
             
-            // Fill the entire screen with snowflakes at various positions
-            for (let i = 0; i < numberOfSnowflakes; i++) {
+            // Setup navigation links
+            setupNavigation();
+        });
+        
+        function createSnowflakes() {
+            const container = document.getElementById('snowflakeContainer');
+            
+            const config = {
+                count: 180,         
+                minSize: 2,         
+                maxSize: 6,         
+                minDuration: 3,     
+                maxDuration: 8
+            };
+            
+            for (let i = 0; i < config.count; i++) {
                 const snowflake = document.createElement('div');
-                const randomChar = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
-                
                 snowflake.className = 'snowflake';
-                snowflake.textContent = randomChar;
                 
-                // Random horizontal positioning
-                snowflake.style.left = `${Math.random() * 100}vw`;
+                applyRandomStyles(snowflake, config);
                 
-                // Random vertical positioning (throughout the screen)
-                snowflake.style.top = `${Math.random() * 100}vh`;
-                
-                // Random size
-                const size = Math.random() * 20 + 3;
-                snowflake.style.fontSize = `${size}px`;
-                
-                // Random opacity
-                snowflake.style.opacity = Math.random() * 0.8 + 0.2;
-                
-                // Random animation duration
-                const duration = Math.random() * 15 + 5;
-                snowflake.style.animationDuration = `${duration}s`;
-                
-                // No delay - start immediately but from current position
-                snowflake.style.animationDelay = '0s';
-                
-                snowflakesContainer.appendChild(snowflake);
+                container.appendChild(snowflake);
             }
         }
         
-        // Initialize snowflakes immediately
-        createInitialSnowflakes();
+        /**
+         * Applies random styling to a snowflake element
+         * @param {HTMLElement} element - The snowflake DOM element
+         * @param {Object} config - Configuration options
+         */
+        function applyRandomStyles(element, config) {
+            // Random size between minSize and maxSize
+            const size = Math.random() * (config.maxSize - config.minSize) + config.minSize;
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            
+            // Random horizontal position
+            element.style.left = `${Math.random() * 100}%`;
+            
+            // Random animation duration
+            const duration = Math.random() * (config.maxDuration - config.minDuration) + config.minDuration;
+            element.style.animationDuration = `${duration}s`;
+            
+            // Random delay so they don't all start at the same time
+            const delay = Math.random() * 5;
+            element.style.animationDelay = `${delay}s`;
+            
+            // Random horizontal drift as they fall
+            const translateX = Math.random() * 100 - 50; // -50px to 50px
+            element.style.transform = `translateX(${translateX}px)`;
+        }
         
-        // Create new snowflakes periodically
-        setInterval(() => {
-            const snowflakesContainer = document.getElementById('snowflakes-container');
-            const snowflakeChars = ['❄', '❅', '❆', '•', '*', '⋆', '✧', '⁎'];
-            const numberOfNewFlakes = 20;
-            
-            for (let i = 0; i < numberOfNewFlakes; i++) {
-                const snowflake = document.createElement('div');
-                const randomChar = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
-                
-                snowflake.className = 'snowflake';
-                snowflake.textContent = randomChar;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.top = '-10px'; // Start just above viewport
-                
-                const size = Math.random() * 20 + 3;
-                snowflake.style.fontSize = `${size}px`;
-                snowflake.style.opacity = Math.random() * 0.8 + 0.2;
-                
-                const duration = Math.random() * 15 + 5;
-                snowflake.style.animationDuration = `${duration}s`;
-                snowflake.style.animationDelay = '0s'; // No delay
-                
-                snowflakesContainer.appendChild(snowflake);
-                
-                // Remove old snowflakes to prevent memory issues
-                if (snowflakesContainer.children.length > 500) {
-                    snowflakesContainer.removeChild(snowflakesContainer.children[0]);
-                }
-            }
-        }, 1000);
-        
-        // Suggestion modal functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('suggestion-modal');
-            const suggestButton = document.getElementById('suggestion-button');
-            const closeButton = document.querySelector('.close-button');
-            const submitButton = document.querySelector('.submit-button');
-            const successMessage = document.querySelector('.success-message');
-            const textArea = document.getElementById('suggestion-text');
-            
-            // Open modal
-            suggestButton.addEventListener('click', function() {
-                modal.classList.add('active');
+        /**
+         * Sets up navigation links
+         */
+        function setupNavigation() {
+            // Discord button
+            document.getElementById('discordBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://discord.gg/zenex', '_blank');
             });
-            
-            // Close modal when clicking the X
-            closeButton.addEventListener('click', function() {
-                modal.classList.remove('active');
-                successMessage.style.display = 'none';
-                textArea.value = '';
-            });
-            
-            // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.classList.remove('active');
-                    successMessage.style.display = 'none';
-                    textArea.value = '';
-                }
-            });
-            
-            // Submit button functionality
-            submitButton.addEventListener('click', function() {
-                if (textArea.value.trim() !== '') {
-                    // Here you would normally send the data to a server
-                    console.log("Suggestion submitted:", textArea.value);
-                    
-                    // Show success message
-                    successMessage.style.display = 'block';
-                    
-                    // Clear textarea
-                    textArea.value = '';
-                    
-                    // Close modal after 2 seconds
-                    setTimeout(function() {
-                        modal.classList.remove('active');
-                        setTimeout(function() {
-                            successMessage.style.display = 'none';
-                        }, 300);
-                    }, 2000);
-                }
-            });
-        });
-        
-        // Alternative method to update version date via JavaScript
-        // Uncomment this section if you prefer updating via JavaScript
-        /*
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update version date - EDIT THIS LINE TO UPDATE VERSION DATE
-            document.getElementById('versionDate').textContent = 'March 3, 2025';
-        });
-        */
+        }
     </script>
 </body>
 </html>
