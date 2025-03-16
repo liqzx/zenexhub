@@ -3,395 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenex - Home</title>
+    <title>Zenex Hub | The Next Generation of Scripting</title>
     <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --card-bg: #161616;
+            --accent: #4a4a4a;
+            --text: #e0e0e0;
+            --highlight: #8764ff;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            min-height: 100vh;
         }
         
         .navbar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background-color: rgba(0, 0, 0, 0.8);
-            position: relative;
-            z-index: 10;
+            padding: 0.8rem 2rem;
+            background-color: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #2a2a2a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        .navbar .logo {
+        .logo {
             display: flex;
             align-items: center;
             font-size: 1.5rem;
             font-weight: bold;
+            margin-right: 2rem;
         }
         
-        .navbar .logo img {
-            height: 30px;
+        .logo img {
+            width: 30px;
             margin-right: 10px;
         }
         
-        .navbar .nav-links {
+        .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
+            margin-left: auto;
         }
         
-        .navbar .nav-links a {
-            color: #bbb;
+        .nav-links a {
+            color: var(--text);
             text-decoration: none;
-            transition: color 0.3s;
+            opacity: 0.8;
+            transition: all 0.2s;
+            padding: 0.5rem 0;
         }
         
-        .navbar .nav-links a:hover {
-            color: #fff;
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 1;
+            color: white;
+            border-bottom: 2px solid var(--highlight);
         }
         
-        .navbar .nav-links a.active {
-            color: #fff;
-        }
-        
-        .navbar .discord-btn {
+        .discord-btn {
             display: flex;
             align-items: center;
-            background-color: #5865F2;
-            padding: 0.5rem 1rem;
+            margin-left: 2rem;
+            background: rgba(114, 137, 218, 0.1);
+            border: 1px solid rgba(114, 137, 218, 0.3);
+            color: #7289da;
             border-radius: 4px;
-            text-decoration: none;
-            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
         }
         
-        .navbar .discord-btn img {
-            height: 20px;
-            margin-right: 5px;
+        .discord-btn:hover {
+            background: rgba(114, 137, 218, 0.2);
         }
         
+        .discord-btn svg {
+            margin-right: 8px;
+        }
+
+        /* Hero Section */
         .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             padding: 4rem 2rem;
+            text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 20vh;
         }
         
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-align: center;
-            z-index: 2;
+            background: linear-gradient(45deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero p {
             font-size: 1.2rem;
-            color: #bbb;
-            text-align: center;
-            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
         }
         
-        .snowflake-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .download-btn {
+            background-color: var(--highlight);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(135, 100, 255, 0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background-color: rgba(20, 20, 20, 0.4);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(135, 100, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            opacity: 0.7;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Latest Version */
+        .latest-version {
+            padding: 4rem 2rem;
+        }
+        
+        .version-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
             overflow: hidden;
-            pointer-events: none;
+        }
+        
+        .version-badge {
+            background-color: rgba(135, 100, 255, 0.1);
+            color: var(--highlight);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .version-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .version-logo {
+            width: 40px;
+            height: 40px;
+            background-color: var(--highlight);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .updates-list {
+            margin-top: 2rem;
+        }
+        
+        .update-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .download-now {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            background-color: var(--card-bg);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+        
+        /* White flare animation */
+        .flare {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(transparent, white, transparent);
+            border-radius: 100%;
+            animation: flare-fall 15s linear infinite;
+            opacity: 0;
             z-index: 1;
         }
         
-        .snowflake {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            animation-name: snowfall;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
-        
-        @keyframes snowfall {
+        @keyframes flare-fall {
             0% {
-                transform: translateY(-10px) rotate(0deg);
+                transform: translateY(-100%);
                 opacity: 0;
             }
             10% {
-                opacity: 1;
+                opacity: 0.8;
             }
             90% {
                 opacity: 0.8;
             }
             100% {
-                transform: translateY(calc(100vh + 10px)) rotate(360deg);
+                transform: translateY(100vh);
                 opacity: 0;
-            }
-        }
-        
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: rgba(20, 20, 20, 0.8);
-            border-radius: 12px;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            margin-bottom: 2rem;
-        }
-        
-        .about-us {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            gap: 2rem;
-        }
-        
-        .about-us h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        
-        .about-us p {
-            font-size: 1.1rem;
-            color: #bbb;
-            text-align: center;
-            max-width: 800px;
-            line-height: 1.6;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1200px;
-        }
-        
-        .feature-card {
-            background-color: rgba(30, 30, 30, 0.8);
-            border-radius: 8px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-card .icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            text-align: center;
-        }
-        
-        .feature-card p {
-            margin: 0;
-            text-align: center;
-            color: #bbb;
-        }
-        
-        .cta-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-            margin-top: 2rem;
-            border: none;
-            cursor: pointer;
-            width: 200px;
-        }
-        
-        .cta-button:hover {
-            background-color: #444;
-            transform: scale(1.05);
-        }
-        
-        .footer {
-            background-color: rgba(10, 10, 10, 0.8);
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #999;
-        }
-        
-        @media (max-width: 768px) {
-            .feature-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             }
         }
     </style>
 </head>
 <body>
-    <!-- Snowflake Container -->
-    <div class="snowflake-container" id="snowflakeContainer"></div>
-    
-    <!-- Navigation Bar -->
-    <nav class="navbar">
+    <!-- Navigation -->
+    <div class="navbar">
         <div class="logo">
-            <img src="/api/placeholder/30/30" alt=" ">
-            Zenex
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" stroke="#8764ff" fill="none"/>
+                <path d="M12 2L12 12L17 17" stroke="#8764ff"/>
+            </svg>
+            Zenex Hub
         </div>
         <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="script.html">Script</a>
+            <a href="#" class="active">Home</a>
+            <a href="#">Help</a>
+            <a href="#">Executor</a>
+            <a href="#">Download</a>
+            <a href="#">Credits</a>
+            <a href="#">Donate</a>
         </div>
-        <a href="#" class="discord-btn" id="discordBtn">
-            <img src="/api/placeholder/20/20" alt=" ">
+        <button class="discord-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#7289da"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"></path></svg>
             Join Discord
-        </a>
-    </nav>
+        </button>
+    </div>
     
     <!-- Hero Section -->
     <div class="hero">
-        <h1>Welcome to Zenex</h1>
-        <p>The next generation of scripting solutions</p>
+        <!-- Animated flares -->
+        <div class="flare" style="height: 100px; left: 15%; animation-delay: 0s;"></div>
+        <div class="flare" style="height: 150px; left: 25%; animation-delay: 2s;"></div>
+        <div class="flare" style="height: 120px; left: 40%; animation-delay: 5s;"></div>
+        <div class="flare" style="height: 180px; left: 60%; animation-delay: 7s;"></div>
+        <div class="flare" style="height: 140px; left: 75%; animation-delay: 3s;"></div>
+        <div class="flare" style="height: 160px; left: 85%; animation-delay: 8s;"></div>
+        
+        <h1>Download Zenex Hub</h1>
+        <p>Experience the next generation of scripting with enhanced performance, multi-client support, and an intuitive interface.</p>
+        <button class="download-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Now
+        </button>
     </div>
     
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="about-us">
-            <h2>About Us</h2>
-            <p>
-                Zenex is a cutting-edge scripting platform designed to revolutionize the way developers create and execute scripts. 
-                Our team of passionate developers works tirelessly to bring you the most efficient, powerful, and user-friendly scripting experience possible.
-            </p>
-            <p>
-                Our mission is to empower developers with tools that make complex tasks simple and accessible. Join our growing community today!
-            </p>
-        </div>
-        
-        <div class="about-us">
-            <h2>Key Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="icon">✅</div>
-                    <h3>Universal Compatibility</h3>
-                    <p>Works with most popular executors</p>
+    <!-- Features Section -->
+    <div class="features">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8764ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>High Performance</h3>
-                    <p>Run scripts with exceptional speed</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">🛡️</div>
-                    <h3>Secure Execution</h3>
-                    <p>Advanced protection for your scripts</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="icon">👥</div>
-                    <h3>Community Support</h3>
-                    <p>Join our growing developer community</p>
-                </div>
+                <h3>Good Community</h3>
+                <p>Join our growing community of developers and enthusiasts to share knowledge, scripts, and get instant support.</p>
             </div>
-            
-            <a href="script.html" class="cta-button">
-                Get Started
-            </a>
-        </div>
-    </div>
-    
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2025 Zenex Team. All rights reserved.</p>
-    </div>
-
-    <!-- JavaScript -->
-    <script>
-        /**
-         * Snowflake Animation
-         * Creates dynamic animated snowflakes falling across the screen
-         */
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create snowflakes when DOM is fully loaded
-            createSnowflakes();
-            
-            // Setup navigation links
-            setupNavigation();
-        });
-        
-        function createSnowflakes() {
-            const container = document.getElementById('snowflakeContainer');
-            
-            const config = {
-                count: 180,         
-                minSize: 2,         
-                maxSize: 6,         
-                minDuration: 3,     
-                maxDuration: 8
-            };
-            
-            for (let i = 0; i < config.count; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                
-                applyRandomStyles(snowflake, config);
-                
-                container.appendChild(snowflake);
-            }
-        }
-        
-        /**
-         * Applies random styling to a snowflake element
-         * @param {HTMLElement} element - The snowflake DOM element
-         * @param {Object} config - Configuration options
-         */
-        function applyRandomStyles(element, config) {
-            // Random size between minSize and maxSize
-            const size = Math.random() * (config.maxSize - config.minSize) + config.minSize;
-            element.style.width = `${size}px`;
-            element.style.height = `${size}px`;
-            
-            // Random horizontal position
-            element.style.left = `${Math.random() * 100}%`;
-            
-            // Random animation duration
-            const duration = Math.random() * (config.maxDuration - config.minDuration) + config.minDuration;
-            element.style.animationDuration = `${duration}s`;
-            
-            // Random delay so they don't all start at the same time
-            const delay = Math.random() * 5;
-            element.style.animationDelay = `${delay}s`;
-            
-            // Random horizontal drift as they fall
-            const translateX = Math.random() * 100 - 50; // -50px to 50px
-            element.style.transform = `translateX(${translateX}px)`;
-        }
-        
-        /**
-         * Sets up navigation links
-         */
-        function setupNavigation() {
-            // Discord button
-            document.getElementById('discordBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.open('https://discord.gg/zenex', '_blank');
-            });
-        }
-    </script>
-</body>
-</html>
