@@ -208,7 +208,6 @@
       border-bottom: none;
     }
     
-    /* Animation elements */
     .flare {
       position: absolute;
       background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
@@ -313,12 +312,12 @@
   </div>
   
   <script>
-    // Create flares
+    
     function createFlares() {
       const hero = document.querySelector('.hero');
       const heroRect = hero.getBoundingClientRect();
       
-      // Create large central flare
+      
       const centralFlare = document.createElement('div');
       centralFlare.classList.add('flare');
       centralFlare.style.width = '300px';
@@ -328,10 +327,10 @@
       centralFlare.style.transform = 'translate(-50%, -50%)';
       hero.appendChild(centralFlare);
       
-      // Animate central flare
+     
       animateCentralFlare(centralFlare);
       
-      // Create random flares
+      
       setInterval(() => {
         const flare = document.createElement('div');
         flare.classList.add('flare');
@@ -348,7 +347,7 @@
         
         hero.appendChild(flare);
         
-        // Animate flare
+        
         let opacity = 0;
         const fadeIn = setInterval(() => {
           opacity += 0.01;
@@ -372,7 +371,7 @@
         }, 20);
       }, 2000);
       
-      // Create particles
+      
       for (let i = 0; i < 50; i++) {
         createParticle(hero, heroRect);
       }
@@ -399,14 +398,14 @@
       const particle = document.createElement('div');
       particle.classList.add('particle');
       
-      // Random initial position
+      
       const x = Math.random() * containerRect.width;
       const y = Math.random() * containerRect.height;
       
-      // Random size
+     
       const size = Math.random() * 2 + 1;
       
-      // Random speed
+     
       const speedX = (Math.random() - 0.5) * 0.5;
       const speedY = (Math.random() - 0.5) * 0.5;
       
@@ -418,7 +417,7 @@
       
       container.appendChild(particle);
       
-      // Animate particle
+      
       let posX = x;
       let posY = y;
       
@@ -426,7 +425,7 @@
         posX += speedX;
         posY += speedY;
         
-        // Boundary check
+        
         if (posX < 0 || posX > containerRect.width) {
           posX = Math.random() * containerRect.width;
         }
@@ -440,7 +439,7 @@
       }, 50);
     }
     
-    // Animate ring rotation
+    
     function animateRing() {
       const ring = document.querySelector('.ring');
       let rotation = 0;
@@ -451,12 +450,12 @@
       }, 50);
     }
     
-    // Button hover effects
+    
     function setupButtonEffects() {
       const ctaBtn = document.querySelector('.cta-btn');
       
       ctaBtn.addEventListener('mouseover', () => {
-        // Create glow effect
+        
         const glow = document.createElement('div');
         glow.style.position = 'absolute';
         glow.style.width = '100%';
@@ -467,14 +466,14 @@
         glow.style.borderRadius = 'inherit';
         ctaBtn.appendChild(glow);
         
-        // Remove after hover
+        
         ctaBtn.addEventListener('mouseout', () => {
           glow.remove();
         }, { once: true });
       });
     }
     
-    // Initialize animations
+    
     window.addEventListener('load', () => {
       createFlares();
       animateRing();
